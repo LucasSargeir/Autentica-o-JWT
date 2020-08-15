@@ -19,7 +19,7 @@ export default class AuthController{
     async register(request: Request, response: Response){
 
         const {
-            nome,
+            email,
             data_nasc,
             senha,
             sexo,
@@ -27,7 +27,7 @@ export default class AuthController{
 
         try{
 
-            const user = await Knex('usuario').select('*').where("nome", nome).first()
+            const user = await Knex('usuario').select('*').where("email", email).first()
 
             if(user){
 
@@ -38,14 +38,14 @@ export default class AuthController{
             const hash = await bcrypt.hash(senha, 10)
 
             const insetedUser = await Knex('usuario').insert({
-                nome,
+                email,
                 sexo,
                 senha: hash,
                 data_nasc,
             })
 
 
-            return response.json({ "id": insetedUser[0], nome, sexo, data_nasc, token: generateToken(insetedUser[0])})
+            return response.json({ "id": insetedUser[0], email, sexo, data_nasc, token: generateToken(insetedUser[0])})
             
         }
         catch(err){
@@ -60,9 +60,9 @@ export default class AuthController{
 
     async authenticate(request: Request, response: Response){
 
-        const {nome, senha} = request.body;
+        const {email, senha} = request.body;
 
-        const user = await Knex('usuario').select('*').where("nome", nome).first()
+        const user = await Knex('usuario').select('*').where("email", email).first()
 
         if(!user){
 
