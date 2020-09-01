@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
       margin: 5,
       height: 50,
       borderRadius: 8,
-      width: 200
+      width: 200,
+      padding: 15,
     },
     textInput:{
       fontSize: 15,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, TextInput } from 'react-native';
 import styles from './styles'
 import { RectButton } from 'react-native-gesture-handler';
@@ -8,11 +8,16 @@ function Login() {
 
 	const { signed, user, signIn } = useAuth();
 
+	const [email, setEmail] =  useState("")
+	const [senha, setSenha] =  useState("")
+
 //	console.log(signed);
 //	console.log(user)
 
 	async function handleNavigateLogin(){
-		await signIn();
+
+		await signIn({email, senha});
+
 	}
 
 	return (
@@ -24,10 +29,10 @@ function Login() {
     	<View style={styles.boxComponentForm}>
 
 			<Text style={styles.textInput}>E-mail</Text>
-			<TextInput style={styles.input}/>			
+			<TextInput style={styles.input} onChangeText={setEmail}/>			
 
 			<Text style={styles.textInput}>Senha</Text>
-			<TextInput style={styles.input}/>
+			<TextInput style={styles.input} onChangeText={setSenha}/>
 
         	<RectButton style={styles.buttonComponent} onPress={handleNavigateLogin}>
         		<Text style={styles.textButtonComponent}>Entrar</Text>

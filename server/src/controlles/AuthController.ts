@@ -20,6 +20,7 @@ export default class AuthController{
 
         const {
             email,
+            nome,
             data_nasc,
             senha,
             sexo,
@@ -40,12 +41,13 @@ export default class AuthController{
             const insetedUser = await Knex('usuario').insert({
                 email,
                 sexo,
+                nome,
                 senha: hash,
                 data_nasc,
             })
 
 
-            return response.json({ "id": insetedUser[0], email, sexo, data_nasc, token: generateToken(insetedUser[0])})
+            return response.json({ "id": insetedUser[0], email, nome, sexo, data_nasc, token: generateToken(insetedUser[0])})
             
         }
         catch(err){

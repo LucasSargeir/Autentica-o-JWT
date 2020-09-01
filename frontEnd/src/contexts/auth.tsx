@@ -6,14 +6,23 @@ import api from '../services/api';
 interface User{
     nome:string;
     email:string;
+    sexo: string;
+    data_nasc: string;
+    id: number;
+}
+
+interface Validacao{
+    email:string;
+    senha:string;
 }
 
 interface AuthContextData{
     signed: boolean;
     user: User| null;
-    signIn(): Promise<void>;
+    signIn(props: Validacao): Promise<void>;
     signOut(): void;
 }
+
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
@@ -39,9 +48,9 @@ export const AuthProvider: React.FC = ({children}) =>{
         loadStorageData();
     },[])
 
-    async function signIn(){
+    async function signIn(props: Validacao){
 
-        const response = await auth.signIn();
+        const response = await auth.signIn(props);
 
         setUser(response.user);
 
@@ -63,7 +72,7 @@ export const AuthProvider: React.FC = ({children}) =>{
 
 
     return(
-        <AuthContext.Provider value={{signed: !!user, user, signIn, signOut}}>
+        <AuthContext.Provider value={{signed: !!user, user, signOut, signIn}}>
             {children}
         </AuthContext.Provider>
     )
