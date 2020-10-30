@@ -29,7 +29,7 @@ Para isso precisamos entender quais os papéis de cada componente do nosso siste
 
 
 
-### Encriptação de sennha
+### Encriptação de senha
 
 A senha de um usuário é uma informação extremamente sigilosa, e não deve ser armazenado sem criptografia. Para encriptação de senhas em nodejs utilzaremos a biblioteca ***bcryptjs***. Instale-a utilizando o comando abaixo:
 
@@ -187,9 +187,9 @@ if(!/^Bearer$/i.test(scheme)){
 
 Agora, podemos utilizar o método verify para validar o token passado na requisição. Esse método tem a seguinte assinatura `verify(token, key, f(err, decode))`, onde cada parâmetro representa:
 
-	- `token `: token enviado na requisição (sem o "Bearer");
-	- `key`: a chave secreta criada para gerar os tokens;
-	- `f(err, decode)`: função chamada chamada depois da verificação (**err**: caso possua um erro | **decode**: informações passadas no momemnto de criação do token, no nosso caso o id);
+- `token `: token enviado na requisição (sem o "Bearer");
+- `key`: a chave secreta criada para gerar os tokens;
+- `f(err, decode)`: função chamada chamada depois da verificação (**err**: caso possua um erro | **decode**: informações passadas no momemnto de criação do token, no nosso caso o id);
 
 Exemplo:
 
